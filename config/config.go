@@ -101,7 +101,7 @@ func WriteConfig(APIKey, configFile string, save bool) (*Config, error) {
 		}
 
 		if _, err := os.Stat(configFile); os.IsNotExist(err) {
-			pathExist := os.Mkdir(facts.GetConfigPath(), os.ModeDir)
+			pathExist := os.Mkdir(facts.GetConfigPath(), 0644)
 			if pathExist == nil {
 				return nil, fmt.Errorf("problem with creating folder: %v", err)
 			}
