@@ -90,19 +90,16 @@ func GetDistribution() string {
 	if err != nil {
 		return ""
 	}
-
-	return strings.Trim(strings.Trim(dist, "\n"), "\"")
+	return strings.Trim(dist, "\"\n")
 }
 
 func GetShell() string {
-	shell, err := run.RunCommand("echo", os.Getenv("SHELL"))
-	if err != nil {
+	shell := os.Getenv("SHELL")
+	if shell == "" {
 		return ""
 	}
-
-	split := strings.Split(strings.Trim(strings.Trim(shell, "\n"), "\""), "/")
-
-	return split[len(split)-1]
+	parts := strings.Split(shell, "/")
+	return parts[len(parts)-1]
 }
 
 func GetHomeDirectory() string {
@@ -115,21 +112,21 @@ func GetHomeDirectory() string {
 }
 
 func GetUsername() string {
-	name, err := run.RunCommand("echo", os.Getenv("USER"))
-	if err != nil {
+	name := os.Getenv("USER")
+	if name == "" {
 		return ""
 	}
 
-	return strings.Trim(name, "\n")
+	return name
 }
 
 func GetEditor() string {
-	name, err := run.RunCommand("echo", os.Getenv("EDITOR"))
-	if err != nil {
-		return "nano"
+	editor := os.Getenv("EDITOR")
+	if editor == "" {
+		return "vi"
 	}
 
-	return strings.Trim(name, "\n")
+	return editor
 }
 
 func GetConfigFile() string {
