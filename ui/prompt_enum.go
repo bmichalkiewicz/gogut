@@ -40,7 +40,6 @@ type RunMode int
 const (
 	CliMode RunMode = iota
 	ReplMode
-	ScriptsMode
 )
 
 func (m RunMode) String() string {

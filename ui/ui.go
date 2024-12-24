@@ -84,6 +84,7 @@ func NewUI(input *UIInput) *UI {
 
 func (u *UI) Init() tea.Cmd {
 	conf, err := config.NewConfig(facts.GetConfigFile())
+
 	if err != nil {
 		if errors.Is(err, config.ConfigFileNotfoundError{}) {
 			if u.state.runMode == ReplMode {
