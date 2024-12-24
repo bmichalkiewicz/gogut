@@ -1,0 +1,49 @@
+---
+version: "3"
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task -l
+
+  install:
+    desc: Install App
+    cmds:
+      - task: build
+      - cp gogut /usr/local/bin/gogut
+
+  build:
+    desc: Build App
+    cmds:
+      - go build -ldflags '-s -w' -o ./gogut
+
+  run:
+    desc: Run App
+    cmds:
+      - go build && ./gogut
+
+  lint:
+    desc: Run linter
+    cmds:
+      - golangci-lint run .
+
+  fmt:
+    desc: Run formatter
+    cmds:
+      - go fmt .
+
+  upgrade-deps:
+    desc: Upgrade all dependencies
+    cmds:
+      - go get -u ./...
+
+  vet:
+    desc: Run go vet
+    cmds:
+      - go vet
+
+  vuln:
+    desc: Check for vulnerabilities
+    cmds:
+      - govulncheck .
